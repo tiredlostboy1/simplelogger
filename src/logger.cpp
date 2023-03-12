@@ -43,9 +43,11 @@ std::string Logger::LeveltoString(LogLevel level)
     }
 }
 
-std::_Put_time<char> Logger::TimeStamp()
+std::string Logger::TimeStamp()
 {
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
-    return std::put_time(std::localtime(&now_c), "%F %T");
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&now_c), "%F %T");
+    return ss.str();
 }

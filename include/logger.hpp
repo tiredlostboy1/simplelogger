@@ -8,6 +8,7 @@
 #include <mutex>
 #include <chrono>
 #include <iomanip>
+#include <sstream>
 
 enum LogLevel
 {
@@ -27,7 +28,7 @@ private:
 public:
     Logger(const std::string &file, LogLevel level);
     void Log(const std::string &message, LogLevel level);
-    std::_Put_time<char> TimeStamp();
+    std::string TimeStamp();
     std::string LeveltoString(LogLevel level);
 };
 
