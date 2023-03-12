@@ -9,8 +9,6 @@
 #include <chrono>
 #include <iomanip>
 
-using namespace std::chrono_literals;
-
 enum LogLevel
 {
     LOG_LEVEL_DEBUG,
@@ -29,7 +27,7 @@ private:
 public:
     Logger(const std::string &file, LogLevel level);
     void Log(const std::string &message, LogLevel level);
-    auto TimeStamp();
+    std::_Put_time<char> TimeStamp();
     std::string LeveltoString(LogLevel level);
 };
 

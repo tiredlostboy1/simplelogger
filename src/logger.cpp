@@ -18,11 +18,11 @@ void Logger::Log(const std::string &message, LogLevel level)
 
     std::lock_guard<std::mutex> lock(mutex_);
 
-    std::cout << TimeStamp() << "[" << LeveltoString(level) << "]" << message << std::endl;
+    std::cout << TimeStamp() << " [" << LeveltoString(level) << "] " << message << std::endl;
 
     if (file_.is_open())
     {
-        file_ << TimeStamp() << "[" << LeveltoString(level) << "]" << message << std::endl;
+        file_ << TimeStamp() << " [" << LeveltoString(level) << "] " << message << std::endl;
     }
 }
 
@@ -38,10 +38,12 @@ std::string Logger::LeveltoString(LogLevel level)
         return "WARNING";
     case LOG_LEVEL_ERROR:
         return "ERROR";
+    default:
+        return "UNKNOWN";
     }
 }
 
-auto Logger::TimeStamp()
+std::_Put_time<char> Logger::TimeStamp()
 {
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
